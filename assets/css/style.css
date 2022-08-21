@@ -8,6 +8,7 @@
 	--main-font-color: #000000;
 	--main-font-family: 'Barlow Semi Condensed', sans-serif;
 	--input-border-color: hsl(0deg, 0%, 92.5%);
+	--input-error-border-color: hsl(0deg, 100%, 60%);
 	--input-active-border-color: hsl(225deg, 80%, 60%);
 	--input-active-box-shadow-color: hsla(0deg, 0%, 0%, 10%);
 	--button-submit-bg-color: hsl(225deg, 80%, 60%);
@@ -16,9 +17,11 @@
 	--image-block-bg-image: url('../img/aldebaran-s-qtRF_RxCAo0-unsplash.jpg');
 	--image-block-font-color: #FFFFFF;
 	--image-block-logo-bg-color: hsla(0deg, 0%, 0%, 15%);
+	--image-block-credits-bg-color: var(--image-block-logo-bg-color);
 	--form-block-bg-color: hsla(0deg, 0%, 98%);
 	--form-block-form-fieldset-bg-color: #FFFFFF;
 	--form-block-form-fieldset-box-shadow-color: hsla(0deg, 0%, 0%, 5%);
+	--password-error-font-color: #FF0000;
 }
 
 /* ------------------------------------------------------------ RESET */
@@ -62,15 +65,22 @@ body {
 }
 
 a:link {
+	color: #0000FF;
 	text-decoration: none;
 }
 
-a:visited {}
+a:visited {
+	color: #800080;
+}
 
 a:hover,
 a:focus {
 	text-decoration: underline;
 	text-decoration-skip-ink: auto;
+}
+
+a:active {
+	color: #FF0000;
 }
 
 label {
@@ -88,10 +98,15 @@ input:not([type='button']) {
 }
 
 input:not([type='button']):active,
+input:not([type='button']):focus,
 input:not([type='button']):focus-visible {
 	border-color: var(--input-active-border-color);
 	box-shadow: 3px 3px 3px 0 var(--input-active-box-shadow-color);
 	outline: 1px solid var(--input-active-border-color);
+}
+
+input.error {
+	border-color: var(--input-error-border-color);
 }
 
 button[type='submit'] {
@@ -161,9 +176,24 @@ button[type='submit'] {
 }
 
 .image-block-credits {
+	background-color: var(--image-block-credits-bg-color);
 	bottom: 15px;
 	font-size: .75em;
+	padding: 1ch;
 	position: absolute;
+	text-align: center;
+	width: 100%;
+}
+
+.image-block-credits a:link {
+	color: #FFFFFF;
+	text-decoration: underline;
+	text-decoration-skip-ink: auto;
+}
+
+.image-block-credits a:hover,
+.image-block-credits a:focus {
+	text-decoration: none;
 }
 
 /* ------------------------------------------------------- FORM BLOCK */
@@ -232,4 +262,17 @@ button[type='submit'] {
 
 .form-block-form-submit-btn {
 	max-width: 25%;
+}
+
+/* ----------------------------------------------- MATCHING PASSWORDS */
+
+input.error ~ .password-error {
+	display: inline-block;
+}
+
+.password-error {
+	color: var(--password-error-font-color);
+	display: none;
+	font-size: .75em;
+	font-style: italic;
 }
